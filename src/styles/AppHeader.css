@@ -1,0 +1,39 @@
+.AppHeader {
+  background-color: #17252a;
+  width: 100%;
+  box-shadow: 0 0.3rem 1rem #2b7a78;
+  color: #feffff;
+}
+
+.AppHeader .container {
+  overflow: auto;
+  max-width: 75rem;
+  padding: 0 1rem;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+}
+
+.AppHeader h1 {
+  display: inline-block;
+}
+
+.AppHeader .right {
+  margin-left: auto;
+}
+
+.AppHeader .right button {
+  background: none;
+  border: none;
+  color: inherit;
+  margin-left: 1rem;
+  cursor: pointer;
+  transition: color 0.2s linear;
+  outline: none;
+}
+
+.AppHeader .right button:hover,
+.AppHeader .right button:focus,
+.AppHeader .right button:active {
+  color: #3aafa9;
+}

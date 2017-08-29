@@ -1,0 +1,18 @@
+html {
+  background-color: #3aafa9;
+  height: 100%;
+  overflow: hidden;
+  box-sizing: border-box;
+  font-family: 'Raleway', sans-serif;
+}
+
+body {
+  height: 100%;
+  overflow: auto;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
