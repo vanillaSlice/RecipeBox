@@ -8,21 +8,11 @@ const AppHeader = (props) => {
   return (
     <header className="AppHeader">
       <div className="container">
-        <h1>Recipe Box</h1>
-        <div className="right">
-          <button type="button">
-            <FontAwesome
-              name='search'
-              size='2x'
-            />
-          </button>
-          <button type="button">
-            <FontAwesome
-              name='plus'
-              size='2x'
-            />
-          </button>
-        </div>
+        <h1><a href=".">Recipe Box</a></h1>
+        <button type="button" onClick={props.onAddRecipeClick}>
+          <FontAwesome name="plus" size="2x" tag="i" />
+          <span className="sr-only">Add new recipe</span>
+        </button>
       </div>
     </header>
   );

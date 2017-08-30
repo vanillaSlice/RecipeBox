@@ -1,0 +1,87 @@
+.NewRecipeForm {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: #feffff;
+  color: #17252a;
+  overflow: auto;
+}
+
+.NewRecipeForm .container {
+  max-width: 37.5rem;
+  padding: 1rem;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.NewRecipeForm button {
+  margin-left: auto;
+  background: none;
+  border: none;
+  color: inherit;
+  cursor: pointer;
+  transition: color 0.1s linear;
+  outline: none;
+}
+
+.NewRecipeForm button:hover,
+.NewRecipeForm button:focus,
+.NewRecipeForm button:active {
+  color: #3aafa9;
+}
+
+.NewRecipeForm form {
+  width: 100%;
+}
+
+.NewRecipeForm label {
+  margin-top: 1rem;
+  display: inline-block;
+  width: 100%;
+}
+
+.NewRecipeForm input,
+.NewRecipeForm textarea {
+  width: 100%;
+  display: block;
+  margin: 0.5rem 0;
+  border: none;
+  border-bottom: 1px solid #17252a;
+  outline: none;
+  padding: 0.5rem 0;
+  color: inherit;
+  transition: all 0.3s;
+}
+
+.NewRecipeForm input:focus,
+.NewRecipeForm input:active,
+.NewRecipeForm textarea:focus,
+.NewRecipeForm textarea:active  {
+  border-bottom: 1px solid #3aafa9;
+  box-shadow: 0 1px 0 0 #3aafa9;
+}
+
+.NewRecipeForm textarea {
+  height: 8rem;
+}
+
+.NewRecipeForm .submit {
+  background-color: #17252a;
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  margin: 1rem 0;
+  color: #feffff;
+  border-radius: 4px;
+  transition: background 0.1s linear;
+}
+
+.NewRecipeForm .submit:hover,
+.NewRecipeForm .submit:focus,
+.NewRecipeForm .submit:active {
+  background-color: #3aafa9;
+  color: #feffff;
+}
