@@ -6,7 +6,7 @@ import '../styles/RecipeCard.css';
 
 const RecipeCard = (props) => {
   return (
-    <div className="RecipeCard">
+    <div className="RecipeCard" onClick={props.onClick}>
       <h3>Recipe</h3>
     </div>
   );

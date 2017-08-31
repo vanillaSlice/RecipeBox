@@ -2,20 +2,19 @@ import React from 'react';
 
 import FontAwesome from 'react-fontawesome';
 
-import '../styles/NewRecipeForm.css';
+import '../styles/RecipeModal.css';
 
-const NewRecipeForm = (props) => {
+const RecipeModal = (props) => {
   return (
-    <div className="NewRecipeForm">
-      <div className="container">
-        <h2>Add New Recipe</h2>
-        <button type="button" onClick={props.onCloseRecipeFormClick}>
+    <div className="RecipeModal" onClick={props.onCloseRecipeModalClick}>
+      <div className="container" onClick={(e) => {e.stopPropagation()}}>
+        <button type="button" onClick={props.onCloseRecipeModalClick}>
           <FontAwesome name="times" size="2x" tag="i" />
-          <span className="sr-only">Close new recipe form</span>
+          <span className="sr-only">Close new recipe modal</span>
         </button>
-        <form>
+        <form onSubmit={(e) => {e.preventDefault(); e.target.reset()}}>
           <label>
-            Recipe name * <input type="text" required />
+            Recipe name * <input type="text" required autoFocus />
           </label>
           <label>
             Ingredients * <textarea required />
@@ -33,4 +32,4 @@ const NewRecipeForm = (props) => {
   );
 };
 
-export default NewRecipeForm;
+export default RecipeModal;

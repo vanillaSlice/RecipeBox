@@ -1,24 +1,27 @@
-.NewRecipeForm {
+.RecipeModal {
   width: 100%;
   height: 100%;
   position: fixed;
   top: 0;
   left: 0;
-  background-color: #feffff;
   color: #17252a;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.RecipeModal .container {
+  background-color: #feffff;
+  max-width: 45.75rem;
+  padding: 1rem;
+  margin: 1rem auto;
+  display: flex;
+  align-items: flex-start;
+  align-content: flex-start;
+  flex-wrap: wrap;
   overflow: auto;
 }
 
-.NewRecipeForm .container {
-  max-width: 37.5rem;
-  padding: 1rem;
-  margin: 0 auto;
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-}
-
-.NewRecipeForm button {
+.RecipeModal button {
   margin-left: auto;
   background: none;
   border: none;
@@ -28,24 +31,24 @@
   outline: none;
 }
 
-.NewRecipeForm button:hover,
-.NewRecipeForm button:focus,
-.NewRecipeForm button:active {
+.RecipeModal button:hover,
+.RecipeModal button:focus,
+.RecipeModal button:active {
   color: #3aafa9;
 }
 
-.NewRecipeForm form {
+.RecipeModal form {
   width: 100%;
 }
 
-.NewRecipeForm label {
+.RecipeModal label {
   margin-top: 1rem;
   display: inline-block;
   width: 100%;
 }
 
-.NewRecipeForm input,
-.NewRecipeForm textarea {
+.RecipeModal input,
+.RecipeModal textarea {
   width: 100%;
   display: block;
   margin: 0.5rem 0;
@@ -57,19 +60,19 @@
   transition: all 0.3s;
 }
 
-.NewRecipeForm input:focus,
-.NewRecipeForm input:active,
-.NewRecipeForm textarea:focus,
-.NewRecipeForm textarea:active  {
+.RecipeModal input:focus,
+.RecipeModal input:active,
+.RecipeModal textarea:focus,
+.RecipeModal textarea:active  {
   border-bottom: 1px solid #3aafa9;
   box-shadow: 0 1px 0 0 #3aafa9;
 }
 
-.NewRecipeForm textarea {
+.RecipeModal textarea {
   height: 8rem;
 }
 
-.NewRecipeForm .submit {
+.RecipeModal .submit {
   background-color: #17252a;
   display: inline-block;
   padding: 0.5rem 1rem;
@@ -79,9 +82,17 @@
   transition: background 0.1s linear;
 }
 
-.NewRecipeForm .submit:hover,
-.NewRecipeForm .submit:focus,
-.NewRecipeForm .submit:active {
+.RecipeModal .submit:hover,
+.RecipeModal .submit:focus,
+.RecipeModal .submit:active {
   background-color: #3aafa9;
   color: #feffff;
+}
+
+@media (max-width: 768px) {
+  .RecipeModal .container {
+    margin: 0;
+    max-width: 100%;
+    height: 100%;
+  }
 }
