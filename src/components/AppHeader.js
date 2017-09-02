@@ -1,21 +1,28 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
-import FontAwesome from 'react-fontawesome';
+import IconButton from './IconButton';
 
 import '../styles/AppHeader.css';
 
 const AppHeader = (props) => {
   return (
     <header className="AppHeader">
-      <div className="container">
+      <div className="content">
         <h1><a href=".">Recipe Box</a></h1>
-        <button type="button" onClick={props.onAddRecipeClick}>
-          <FontAwesome name="plus" size="2x" tag="i" />
-          <span className="sr-only">Add new recipe</span>
-        </button>
+        <IconButton 
+          buttonStyle="light" 
+          onClick={props.onClick}
+          icon="plus"
+          description="Add new recipe"
+        />
       </div>
     </header>
   );
+};
+
+AppHeader.propTypes = {
+  onClick: PropTypes.func
 };
 
 export default AppHeader;

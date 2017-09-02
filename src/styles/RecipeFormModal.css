@@ -1,0 +1,57 @@
+.RecipeFormModal form {
+  width: 100%;
+}
+
+.RecipeFormModal label {
+  margin-top: 1.17rem;
+  display: inline-block;
+  width: 100%;
+  font-weight: bold;
+}
+
+.RecipeFormModal input,
+.RecipeFormModal textarea {
+  width: 100%;
+  display: block;
+  margin: 0.5rem 0;
+  border: none;
+  border-bottom: 0.0625rem solid #def2f1;
+  outline: none;
+  padding: 0.5rem 0;
+  color: inherit;
+  transition: all 0.3s;
+  background-color: #def2f1;
+  padding: 0.5rem;
+}
+
+.RecipeFormModal input:focus,
+.RecipeFormModal input:active,
+.RecipeFormModal textarea:focus,
+.RecipeFormModal textarea:active  {
+  border-bottom: 0.0625rem solid #3aafa9;
+  box-shadow: 0 0.0625rem 0 0 #3aafa9;
+}
+
+.RecipeFormModal textarea {
+  height: 10rem;
+  resize: none;
+  overflow: auto;
+}
+
+.RecipeFormModal .Button {
+  margin-top: 1.17rem;
+}
+
+/* Remove Firefox invalid red glow */
+
+.RecipeFormModal :invalid {
+  box-shadow: none;
+}
+
+.RecipeFormModal :-moz-submit-invalid {
+  box-shadow: none;
+}
+
+.RecipeFormModal :-moz-ui-invalid {
+  box-shadow: none;
+}

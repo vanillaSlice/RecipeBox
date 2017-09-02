@@ -1,0 +1,54 @@
+.RecipeDisplayModal .row {
+  width: 100%;
+  padding: 0;
+}
+
+.RecipeDisplayModal .row:after {
+  display: table;
+  content: '';
+  clear: both;
+}
+
+.RecipeDisplayModal .recipe-info {
+  padding: 1.17rem 0;
+}
+
+.RecipeDisplayModal h3 {
+  margin-top: 0;
+}
+
+.RecipeDisplayModal p {
+  white-space: pre-line;
+  word-wrap: break-word;
+  hyphens: auto;
+  margin-bottom: 0;
+}
+
+.RecipeDisplayModal .row div {
+  width: 50%;
+  float: left;
+}
+
+.RecipeDisplayModal img {
+  width: 50%;
+  float: right;
+  margin: 1.17rem 0;
+}
+
+.RecipeDisplayModal .Button {
+  margin-right: 0.5rem;
+}
+
+.RecipeDisplayModal .Button:last-child {
+  margin-right: 0;
+}
+
+@media (max-width: 48em) {
+  .RecipeDisplayModal img {
+    width: 100%;
+    float: none;
+  }
+  .RecipeDisplayModal .Button {
+    margin-top: 1.17rem;
+  }
+}

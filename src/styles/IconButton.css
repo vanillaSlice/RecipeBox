@@ -1,0 +1,22 @@
+.IconButton {
+  display: inline-block;
+  background: none;
+  transition: color 0.1s linear;
+  border: none;
+  cursor: pointer;
+  outline: none;
+}
+
+.IconButton.light {
+  color: #feffff;
+}
+
+.IconButton.dark {
+  color: #17252a;
+}
+
+.IconButton:hover,
+.IconButton:focus,
+.IconButton:active {
+  color: #3aafa9;
+}
