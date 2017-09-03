@@ -16,7 +16,6 @@
 }
 
 .IconButton:hover,
-.IconButton:focus,
-.IconButton:active {
+.IconButton:focus {
   color: #3aafa9;
 }

@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import '../styles/RecipeCard.css';
+import './RecipeCard.css';
 
 const RecipeCard = (props) => {
   return (
@@ -9,7 +9,7 @@ const RecipeCard = (props) => {
       <div className="content">
         <div 
           className="image"
-          style={{backgroundImage: "url('" + props.image + "')"}} 
+          style={{backgroundImage: "url('" + props.image + "')"}}
         />
         <h2>{props.name}</h2>
       </div>

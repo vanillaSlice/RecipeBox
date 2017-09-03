@@ -15,8 +15,7 @@
 }
 
 .Button.default:hover,
-.Button.default:focus,
-.Button.default:active {
+.Button.default:focus {
   background-color: #219690;
 }
 
@@ -25,7 +24,6 @@
 }
 
 .Button.danger:hover,
-.Button.danger:focus,
-.Button.danger:active {
+.Button.danger:focus {
   background-color: #c9302c;
 }

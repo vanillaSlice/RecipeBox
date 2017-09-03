@@ -1,54 +1,59 @@
-.RecipeDisplayModal .row {
+.RecipeDisplay .row {
   width: 100%;
   padding: 0;
 }
 
-.RecipeDisplayModal .row:after {
+.RecipeDisplay .row:after {
   display: table;
   content: '';
   clear: both;
 }
 
-.RecipeDisplayModal .recipe-info {
+.RecipeDisplay .recipe-info {
   padding: 1.17rem 0;
 }
 
-.RecipeDisplayModal h3 {
+.RecipeDisplay h3 {
   margin-top: 0;
 }
 
-.RecipeDisplayModal p {
+.RecipeDisplay p {
   white-space: pre-line;
   word-wrap: break-word;
   hyphens: auto;
   margin-bottom: 0;
+  margin-right: 1rem;
 }
 
-.RecipeDisplayModal .row div {
+.RecipeDisplay .row div {
   width: 50%;
   float: left;
 }
 
-.RecipeDisplayModal img {
+.RecipeDisplay img {
   width: 50%;
   float: right;
   margin: 1.17rem 0;
 }
 
-.RecipeDisplayModal .Button {
+.RecipeDisplay .Button {
   margin-right: 0.5rem;
 }
 
-.RecipeDisplayModal .Button:last-child {
+.RecipeDisplay .Button:last-child {
   margin-right: 0;
 }
 
 @media (max-width: 48em) {
-  .RecipeDisplayModal img {
+  .RecipeDisplay img,
+  .RecipeDisplay .row div  {
     width: 100%;
     float: none;
   }
-  .RecipeDisplayModal .Button {
+  .RecipeDisplay p {
+    margin-right: 0;
+  }
+  .RecipeDisplay .Button {
     margin-top: 1.17rem;
   }
 }

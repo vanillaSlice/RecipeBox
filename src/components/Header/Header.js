@@ -1,13 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import IconButton from './IconButton';
+import IconButton from '../IconButton/IconButton';
 
-import '../styles/AppHeader.css';
+import './Header.css';
 
-const AppHeader = (props) => {
+const Header = (props) => {
   return (
-    <header className="AppHeader">
+    <header className="Header">
       <div className="content">
         <h1><a href=".">Recipe Box</a></h1>
         <IconButton 
@@ -21,8 +21,8 @@ const AppHeader = (props) => {
   );
 };
 
-AppHeader.propTypes = {
+Header.propTypes = {
   onClick: PropTypes.func
 };
 
-export default AppHeader;
+export default Header;

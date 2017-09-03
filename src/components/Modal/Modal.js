@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import IconButton from './IconButton';
+import IconButton from '../IconButton/IconButton';
 
-import '../styles/Modal.css';
+import './Modal.css';
 
 const Modal = (props) => {
   return (

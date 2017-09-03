@@ -1,11 +1,11 @@
-.AppHeader {
+.Header {
   background-color: #17252a;
   width: 100%;
   box-shadow: 0 0.3rem 1rem #2b7a78;
   color: #feffff;
 }
 
-.AppHeader .content {
+.Header .content {
   max-width: 75rem;
   padding: 0 1rem;
   margin: 0 auto;
@@ -13,19 +13,18 @@
   align-items: center;
 }
 
-.AppHeader a {
+.Header a {
   color: #feffff;
   text-decoration: none;
   transition: color 0.1s linear;
   outline: none;
 }
 
-.AppHeader a:hover,
-.AppHeader a:focus,
-.AppHeader a:active {
+.Header a:hover,
+.Header a:focus {
   color: #3aafa9;
 }
 
-.AppHeader .IconButton {
+.Header .IconButton {
   margin-left: auto;
 }
