@@ -3,17 +3,15 @@ import { shallow } from 'enzyme';
 
 import Label from './Label';
 
-it('renders with text', () => {
-  const label = shallow(<Label text="test-label" />);
-  expect(label.text()).toEqual('test-label');
-});
+describe('Label', () => {
+  const child = <div />;
+  const label = shallow(<Label text="test-text">{child}</Label>);
 
-it('renders children', () => {
-  const child = (<div />);
-  const label = shallow((
-    <Label text="test-label">
-      {child}
-    </Label>
-  ));
-  expect(label.contains(child)).toEqual(true);
+  test('renders text', () => {
+    expect(label.text()).toBe('test-text');
+  });
+
+  test('renders children', () => {
+    expect(label.contains(child)).toBe(true);
+  });
 });

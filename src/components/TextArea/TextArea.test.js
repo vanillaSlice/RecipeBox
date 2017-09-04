@@ -1,27 +1,33 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import sinon from 'sinon';
 
 import TextArea from './TextArea';
 
-it('renders with id', () => {
-  const textArea = shallow(<TextArea id="test-id" />);
-  expect(textArea.props().id).toEqual('test-id');
-});
+describe('TextArea', () => {
+  const onChange = jest.fn();
+  const textArea = shallow((
+    <TextArea 
+      id="test-id"
+      value="test-value"
+      onChange={onChange}
+      required
+    />
+  ));
 
-it('renders with value', () => {
-  const textArea = shallow(<TextArea value="test-value" />);
-  expect(textArea.props().value).toEqual('test-value');
-});
+  test('renders id', () => {
+    expect(textArea.props().id).toBe('test-id');
+  });
 
-it('triggers function onChange', () => {
-  const onChange = sinon.spy();
-  const textArea = shallow(<TextArea onChange={onChange} />);
-  textArea.simulate('change');
-  expect(onChange.callCount).toEqual(1);
-});
+  test('renders value', () => {
+    expect(textArea.props().value).toBe('test-value');
+  });
 
-it('renders required', () => {
-  const textArea = shallow(<TextArea required />);
-  expect(textArea.props().required).toEqual(true);
+  test('triggers function on change', () => {
+    textArea.simulate('change');
+    expect(onChange).toHaveBeenCalledTimes(1);
+  });
+
+  test('renders required attribute', () => {
+    expect(textArea.props().required).toBe(true);
+  });
 });

@@ -1,38 +1,39 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import sinon from 'sinon';
 
 import Modal from './Modal';
 
-it('modal triggers function when clicked', () => {
-  const onClick = sinon.spy();
-  const modal = shallow(<Modal onClick={onClick} />);
-  modal.simulate('click');
-  expect(onClick.callCount).toEqual(1);
-});
-
-it('renders title', () => {
-  const modal = shallow(<Modal title="test-title" />);
-  expect(modal.find('h2').text()).toEqual('test-title');
-});
-
-it('renders an IconButton', () => {
-  const modal = shallow(<Modal />);
-  expect(modal.find('IconButton').length).toEqual(1);
-});
-
-it('IconButton is given onClick function', () => {
-  const onClick = () => {};
-  const modal = shallow(<Modal onClick={onClick} />);
-  expect(modal.find('IconButton').props().onClick).toEqual(onClick);
-});
-
-it('renders children', () => {
+describe('Modal', () => {
+  const onClose = jest.fn();
   const child = (<div />);
   const modal = shallow((
-    <Modal>
+    <Modal onClose={onClose} title="test-title">
       {child}
     </Modal>
   ));
-  expect(modal.contains(child)).toEqual(true);
+
+  test('onClose function triggered when clicked outside content area', () => {
+    modal.simulate('click');
+    expect(onClose).toHaveBeenCalledTimes(1);
+  });
+
+  test('renders title', () => {
+    expect(modal.find('h2').text()).toBe('test-title');
+  });
+
+  describe('close button', () => {
+    const closeButton = modal.find('IconButton');
+
+    test('renders', () => {
+      expect(closeButton.length).toBe(1);
+    });
+
+    test('is given onClose function', () => {
+      expect(closeButton.props().onClick).toBe(onClose);
+    });
+  });
+
+  test('renders children', () => {
+    expect(modal.contains(child)).toBe(true);
+  });
 });

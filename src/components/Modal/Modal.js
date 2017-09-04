@@ -7,12 +7,12 @@ import './Modal.css';
 
 const Modal = (props) => {
   return (
-    <div className="Modal" onClick={props.onClick}>
+    <div className="Modal" onClick={props.onClose}>
       <div className="content" onClick={e => e.stopPropagation()}>
         <div className="header">
           <h2>{props.title}</h2>
           <IconButton 
-            onClick={props.onClick}
+            onClick={props.onClose}
             icon="close"
             description="Close modal"
           />
@@ -24,7 +24,7 @@ const Modal = (props) => {
 };
 
 Modal.propTypes = {
-  onClick: PropTypes.func,
+  onClose: PropTypes.func,
   title: PropTypes.string
 };
 

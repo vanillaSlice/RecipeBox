@@ -1,158 +1,88 @@
 import React from 'react';
-import { mount, shallow } from 'enzyme';
-import sinon from 'sinon';
+import { shallow } from 'enzyme';
 import ReactTestUtils from 'react-dom/test-utils'; 
 
 import RecipeForm from './RecipeForm';
+import RecipeFormTestUtils from './RecipeFormTestUtils';
 
-it('renders name', () => {
-  const recipeForm = mount(<RecipeForm name="test-name" />);
-  expect(recipeForm.find('Input').at(0).props().value).toEqual('test-name');
-});
+describe('RecipeForm', () => {
+  it('renders name', () => {
+    const recipeForm = shallow(<RecipeForm name="test-name" />);
+    expect(recipeForm.find('#name').props().value).toBe('test-name');
+  });
 
-it('renders ingredients', () => {
-  const recipeForm = mount(<RecipeForm ingredients="test-ingredients" />);
-  expect(recipeForm.find('TextArea').at(0).props().value).toEqual('test-ingredients');
-});
+  it('renders ingredients', () => {
+    const recipeForm = shallow(<RecipeForm ingredients="test-ingredients" />);
+    expect(recipeForm.find('#ingredients').props().value).toBe('test-ingredients');
+  });
+  
+  it('renders method', () => {
+    const recipeForm = shallow(<RecipeForm method="test-method" />);
+    expect(recipeForm.find('#method').props().value).toBe('test-method');
+  });
+  
+  it('renders image', () => {
+    const recipeForm = shallow(<RecipeForm image="test-image" />);
+    expect(recipeForm.find('#image').props().value).toBe('test-image');
+  });
 
-it('renders method', () => {
-  const recipeForm = mount(<RecipeForm method="test-method" />);
-  expect(recipeForm.find('TextArea').at(1).props().value).toEqual('test-method');
-});
+  it('renders save button', () => {
+    const recipeForm = shallow(<RecipeForm />);
+    expect(recipeForm.find('#save').props().text).toBe('Save');
+  });
 
-it('renders image', () => {
-  const recipeForm = mount(<RecipeForm image="test-image" />);
-  expect(recipeForm.find('Input').at(1).props().value).toEqual('test-image');
-});
+  describe('on form submit', () => {
+    const onSave = (recipe) => {
+      expect(recipe).toEqual({
+        name: 'test-name',
+        ingredients: 'test-ingredients',
+        method: 'test-method',
+        image: 'test-image'
+      });
+    };
+    const component = ReactTestUtils.renderIntoDocument(<RecipeForm onSave={onSave} />);
 
-it('renders submit button', () => {
-  const recipeForm = mount(<RecipeForm />);
-  expect(recipeForm.find('Button').at(0).text()).toEqual('Save');
-});
+    RecipeFormTestUtils.updateName(component, 'test-name');
+    RecipeFormTestUtils.updateIngredients(component, 'test-ingredients');
+    RecipeFormTestUtils.updateMethod(component, 'test-method');
+    RecipeFormTestUtils.updateImage(component, 'test-image');
 
-it('renders clear button', () => {
-  const recipeForm = mount(<RecipeForm />);
-  expect(recipeForm.find('Button').at(1).text()).toEqual('Clear');
-});
+    RecipeFormTestUtils.submit(component);
 
-it('save function called on form submit', () => {
-  const onSave = sinon.spy();
-  const recipeForm = mount(<RecipeForm onSave={onSave} />);
-  recipeForm.simulate('submit');
-  expect(onSave.callCount).toEqual(1);
-});
-
-it('save function is passed recipe on form submit', () => {
-  // assert we have received expected recipe from form
-  const onSave = (recipe) => {
-    expect(recipe).toEqual({
-      name: 'test-name',
-      ingredients: 'test-ingredients',
-      method: 'test-method',
-      image: 'test-image'
+    it('clears form', () => {    
+      expect(RecipeFormTestUtils.getName(component)).toBe('');
+      expect(RecipeFormTestUtils.getIngredients(component)).toBe('');
+      expect(RecipeFormTestUtils.getMethod(component)).toBe('');
+      expect(RecipeFormTestUtils.getImage(component)).toBe('');
     });
-  };
 
-  const component = ReactTestUtils.renderIntoDocument(<RecipeForm onSave={onSave} />);
-  const recipeForm = ReactTestUtils.findRenderedDOMComponentWithTag(component, 'form');
-  const inputs = ReactTestUtils.scryRenderedDOMComponentsWithTag(component, 'input');
-  const textareas = ReactTestUtils.scryRenderedDOMComponentsWithTag(component, 'textarea');
-  const name = inputs[0];
-  const ingredients = textareas[0];
-  const method = textareas[1];
-  const image = inputs[1];
-
-  // update all the form values
-  name.value = 'test-name';
-  ReactTestUtils.Simulate.change(name);
-  ingredients.value = 'test-ingredients';
-  ReactTestUtils.Simulate.change(ingredients);
-  method.value = 'test-method';
-  ReactTestUtils.Simulate.change(method);
-  image.value = 'test-image';
-  ReactTestUtils.Simulate.change(image);
-
-  // submit changes
-  ReactTestUtils.Simulate.submit(recipeForm);
-});
-
-it('display save message on save', () => {
-  const onSave = sinon.spy();
-  const recipeForm = mount(<RecipeForm onSave={onSave} />);
-  recipeForm.simulate('submit');
-  const spans = recipeForm.find('span');
-  const saveMessage = spans.at(spans.length - 1);
-  expect(saveMessage.text()).toEqual('Saved recipe!');
-});
-
-describe('resets form to original props on form submit', () => {
-  const component = ReactTestUtils.renderIntoDocument(<RecipeForm onSave={() => {}} />);
-  const recipeForm = ReactTestUtils.findRenderedDOMComponentWithTag(component, 'form');
-  const inputs = ReactTestUtils.scryRenderedDOMComponentsWithTag(component, 'input');
-  const textareas = ReactTestUtils.scryRenderedDOMComponentsWithTag(component, 'textarea');
-  const name = inputs[0];
-  const ingredients = textareas[0];
-  const method = textareas[1];
-  const image = inputs[1];
-
-  // update all the form values
-  name.value = 'test-name';
-  ReactTestUtils.Simulate.change(name);
-  ingredients.value = 'test-ingredients';
-  ReactTestUtils.Simulate.change(ingredients);
-  method.value = 'test-method';
-  ReactTestUtils.Simulate.change(method);
-  image.value = 'test-image';
-  ReactTestUtils.Simulate.change(image);
-
-  // submit changes
-  ReactTestUtils.Simulate.submit(recipeForm);
-
-  it('name is cleared', () => {
-    expect(name.value).toEqual('');
+    it('renders save message', () => {
+      const saveMessage = ReactTestUtils.findRenderedDOMComponentWithClass(component, 'save-message');
+      expect(saveMessage.textContent).toBe('Saved recipe!');
+    });
   });
-  it('ingredients are cleared', () => {
-    expect(ingredients.value).toEqual('');
+
+  describe('clear button', () => {
+    const recipeForm = shallow((
+      <RecipeForm
+        name="test-name"
+        ingredients="test-ingredients"
+        method="test-method"
+        image="test-image"
+      />
+    ));
+    const clearButton = recipeForm.find('#clear');
+
+    it('renders', () => {
+      expect(clearButton.length).toBe(1);
+    });
+
+    it('clears form on click', () => {
+      clearButton.simulate('click');
+      expect(recipeForm.find('#name').props().value).toBe('');
+      expect(recipeForm.find('#ingredients').props().value).toBe('');
+      expect(recipeForm.find('#method').props().value).toBe('');
+      expect(recipeForm.find('#image').props().value).toBe('');
+    });
   });
-  it('method is cleared', () => {
-    expect(method.value).toEqual('');
-  });
-  it('image is cleared', () => {
-    expect(image.value).toEqual('');
-  });
-});
-
-describe('clears form on clear button click', () => {
-  const recipeForm = mount((
-    <RecipeForm 
-      name="test-name"
-      ingredients="test-ingredients"
-      method="test-method"
-      image="test-image"
-    />
-  ));
-});
-
-it('name is cleared on clear button click', () => {
-  const recipeForm = mount(<RecipeForm name="test-name" />);
-  recipeForm.find('Button').at(1).simulate('click');
-  expect(recipeForm.find('Input').at(0).props().value).toEqual('');
-});
-
-it('ingredients are cleared on clear button click', () => {
-  const recipeForm = mount(<RecipeForm ingredients="test-ingredients" />);
-  recipeForm.find('Button').at(1).simulate('click');
-  expect(recipeForm.find('TextArea').at(0).props().value).toEqual('');
-});
-
-it('method is cleared on clear button click', () => {
-  const recipeForm = mount(<RecipeForm method="test-method" />);
-  recipeForm.find('Button').at(1).simulate('click');
-  expect(recipeForm.find('TextArea').at(1).props().value).toEqual('');
-});
-
-it('image is cleared on clear button click', () => {
-  const recipeForm = mount(<RecipeForm image="test-image" />);
-  recipeForm.find('Button').at(1).simulate('click');
-  expect(recipeForm.find('Input').at(1).props().value).toEqual('');
 });

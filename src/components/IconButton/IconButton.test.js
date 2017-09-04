@@ -1,27 +1,33 @@
 import React from 'react';
-import { mount, shallow } from 'enzyme';
-import sinon from 'sinon';
+import { shallow } from 'enzyme';
 
 import IconButton from './IconButton';
 
-it('renders with style class', () => {
-  const button = shallow(<IconButton style="light" />);
-  expect(button.hasClass('light'));
-});
+describe('IconButton', () => {
+  const onClick = jest.fn();
+  const iconButton = shallow((
+    <IconButton 
+      buttonStyle="light"
+      onClick={onClick}
+      icon="close"
+      description="test-description"
+    />
+  ));
 
-it('triggers function when clicked', () => {
-  const onClick = sinon.spy();
-  const button = shallow((<IconButton onClick={onClick} />));
-  button.simulate('click');
-  expect(onClick.callCount).toEqual(1);
-});
+  test('renders style class', () => {
+    expect(iconButton.hasClass('light')).toBe(true);
+  });
 
-it('renders icon', () => {
-  const button = mount(<IconButton icon="close" />);
-  expect(button.find('.fa').hasClass('fa-close'));
-});
+  test('function is triggered when clicked', () => {
+    iconButton.simulate('click');
+    expect(onClick).toHaveBeenCalledTimes(1);
+  });
 
-it('renders description', () => {
-  const button = shallow(<IconButton description="test-description" />);
-  expect(button.find('span').text()).toEqual('test-description');
+  test('renders font awesome icon', () => {
+    expect(iconButton.find('FontAwesome').props().name).toBe('close');
+  });
+
+  test('renders description', () => {
+    expect(iconButton.find('span').text()).toBe('test-description');
+  });
 });

@@ -1,37 +1,43 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import sinon from 'sinon';
 
 import Input from './Input';
 
-it('renders with type', () => {
-  const input = shallow(<Input type="URL" />);
-  expect(input.props().type).toEqual('URL');
-});
+describe('Input', () => {
+  const onChange = jest.fn();
+  const input = shallow((
+    <Input 
+      type="URL"
+      id="test-id"
+      value="test-value"
+      onChange={onChange}
+      required
+      autoFocus
+    />
+  ));
 
-it('renders with id', () => {
-  const input = shallow(<Input id="test-id" />);
-  expect(input.props().id).toEqual('test-id');
-});
+  test('renders type', () => {
+    expect(input.props().type).toBe('URL');
+  });
 
-it('renders with value', () => {
-  const input = shallow(<Input value="test-value" />);
-  expect(input.props().value).toEqual('test-value');
-});
+  test('renders id', () => {
+    expect(input.props().id).toBe('test-id');
+  });
 
-it('triggers function onChange', () => {
-  const onChange = sinon.spy();
-  const input = shallow((<Input onChange={onChange} />));
-  input.simulate('change');
-  expect(onChange.callCount).toEqual(1);
-});
+  test('renders value', () => {
+    expect(input.props().value).toBe('test-value');
+  });
 
-it('renders required', () => {
-  const input = shallow(<Input required />);
-  expect(input.props().required).toEqual(true);
-});
+  test('function is triggered when changed', () => {
+    input.simulate('change');
+    expect(onChange).toHaveBeenCalledTimes(1);
+  });
 
-it('renders autoFocus', () => {
-  const input = shallow(<Input autoFocus />);
-  expect(input.props().autoFocus).toEqual(true);
+  test('renders required attribute', () => {
+    expect(input.props().required).toBe(true);
+  });
+
+  test('renders autoFocus attribute', () => {
+    expect(input.props().autoFocus).toBe(true);
+  });
 });

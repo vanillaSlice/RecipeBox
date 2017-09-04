@@ -3,18 +3,23 @@ import { shallow } from 'enzyme';
 
 import Header from './Header';
 
-it('renders an h1', () => {
-  const header = shallow(<Header />);
-  expect(header.find('h1').length).toEqual(1);
-});
+describe('Header', () => {
+  const onAdd = jest.fn();
+  const header = shallow(<Header onAdd={onAdd} />);
 
-it('renders an IconButton', () => {
-  const header = shallow(<Header />);
-  expect(header.find('IconButton').length).toEqual(1);
-});
+  test('renders heading', () => {
+    expect(header.find('h1').length).toBe(1);
+  });
 
-it('IconButton is given onClick function', () => {
-  const onClick = () => {};
-  const header = shallow(<Header onClick={onClick} />);
-  expect(header.find('IconButton').props().onClick).toEqual(onClick);
+  describe('add recipe button', () => {
+    const addRecipeButton = header.find('IconButton');
+
+    test('renders', () => {
+      expect(addRecipeButton.length).toBe(1);
+    });
+
+    test('is given onAdd function', () => {
+      expect(addRecipeButton.props().onClick).toBe(onAdd);
+    });
+  });
 });

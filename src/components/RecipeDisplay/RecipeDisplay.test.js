@@ -1,51 +1,69 @@
 import React from 'react';
-import { mount, shallow } from 'enzyme';
+import { shallow } from 'enzyme';
 
 import RecipeDisplay from './RecipeDisplay';
 
-it('renders recipe image', () => {
-  const recipeDisplay = shallow(<RecipeDisplay image="test-image.jpg" />);
-  expect(recipeDisplay.find('img').props().src).toEqual('test-image.jpg');
-});
+describe('RecipeDisplay', () => {
+  const onEdit = jest.fn();
+  const onDelete = jest.fn();
+  const recipeDisplay = shallow((
+    <RecipeDisplay
+      image="test-image.jpg"
+      name="test-name"
+      ingredients="test-ingredients"
+      method="test-method"
+      onEdit={onEdit}
+      onDelete={onDelete}
+    />
+  ));
 
-it('renders name in image alt attribute', () => {
-  const recipeDisplay = shallow(<RecipeDisplay name="test-image" />);
-  expect(recipeDisplay.find('img').props().alt).toEqual('test-image');
-});
+  describe('image', () => {
+    const image = recipeDisplay.find('img');
 
-it('renders name in image title attribute', () => {
-  const recipeDisplay = shallow(<RecipeDisplay name="test-image" />);
-  expect(recipeDisplay.find('img').props().title).toEqual('test-image');
-});
+    test('renders',() => {
+      expect(image.props().src).toBe('test-image.jpg');
+    });
 
-it('renders recipe ingredients', () => {
-  const recipeDisplay = shallow(<RecipeDisplay ingredients="test-ingredients" />);
-  expect(recipeDisplay.find('.recipe-info p').at(0).text()).toEqual('test-ingredients');
-});
+    test('renders alt attribute',() => {
+      expect(image.props().alt).toBe('test-name');
+    });
 
-it('renders recipe method', () => {
-  const recipeDisplay = shallow(<RecipeDisplay method="test-method" />);
-  expect(recipeDisplay.find('.recipe-info p').at(1).text()).toEqual('test-method');
-});
+    test('renders title attribute',() => {
+      expect(image.props().title).toBe('test-name');
+    });
+  });
 
-it('renders edit button', () => {
-  const recipeDisplay = mount(<RecipeDisplay />);
-  expect(recipeDisplay.find('Button').at(0).text()).toEqual('Edit');
-});
+  describe('recipe-info', () => {
+    const recipeInfo = recipeDisplay.find('.recipe-info p');
 
-it('renders delete button', () => {
-  const recipeDisplay = mount(<RecipeDisplay />);
-  expect(recipeDisplay.find('Button').at(1).text()).toEqual('Delete');
-});
+    test('renders ingredients', () => {
+      expect(recipeInfo.at(0).text()).toBe('test-ingredients');
+    });
+  
+    test('renders method', () => {
+      expect(recipeInfo.at(1).text()).toBe('test-method');
+    });
+  });
 
-it('edit button is given edit function', () => {
-  const onEdit = () => {};
-  const recipeDisplay = shallow(<RecipeDisplay onEdit={onEdit} />);
-  expect(recipeDisplay.find('Button').at(0).props().onClick).toEqual(onEdit);
-});
+  describe('buttons', () => {
+    const buttons = recipeDisplay.find('Button');
+    const editButton = buttons.at(0);
+    const deleteButton = buttons.at(1);
 
-it('delete button is given delete function', () => {
-  const onDelete = () => {};
-  const recipeDisplay = shallow(<RecipeDisplay onDelete={onDelete} />);
-  expect(recipeDisplay.find('Button').at(1).props().onClick).toEqual(onDelete);
+    test('renders edit button', () => {
+      expect(editButton.props().text).toBe('Edit');
+    });
+
+    test('edit button is given edit function', () => {
+      expect(editButton.props().onClick).toBe(onEdit);
+    });
+
+    test('renders delete button', () => {
+      expect(deleteButton.props().text).toBe('Delete');
+    });
+
+    test('delete button is given delete function', () => {
+      expect(deleteButton.props().onClick).toBe(onDelete);
+    });
+  });
 });

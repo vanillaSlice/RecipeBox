@@ -12,7 +12,7 @@ const Header = (props) => {
         <h1><a href=".">Recipe Box</a></h1>
         <IconButton 
           buttonStyle="light" 
-          onClick={props.onClick}
+          onClick={props.onAdd}
           icon="plus"
           description="Add new recipe"
         />
@@ -22,7 +22,7 @@ const Header = (props) => {
 };
 
 Header.propTypes = {
-  onClick: PropTypes.func
+  onAdd: PropTypes.func
 };
 
 export default Header;

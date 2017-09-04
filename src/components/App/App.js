@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 
 import Header from '../Header/Header';
-import RecipeCard from '../RecipeCard/RecipeCard';
+import RecipeList from '../RecipeList/RecipeList';
 import Modal from '../Modal/Modal';
-import RecipeDisplay from '../RecipeDisplay/RecipeDisplay';
 import RecipeForm from '../RecipeForm/RecipeForm';
+import RecipeDisplay from '../RecipeDisplay/RecipeDisplay';
 
 import data from '../../data/recipes.json';
 
@@ -13,81 +13,63 @@ import './App.css';
 class App extends Component {
   state = {
     recipes: JSON.parse(localStorage.getItem('recipes')) || data.recipes,
-    temporaryRecipe: {},
-    success: false,
-    selectedRecipe: '',
-    mode: '',
-    displayModal: false
+    selectedRecipe: {},
+    displayModal: false,
+    mode: ''
   };
 
-  handleCardClick = () => {
-    this.setState(prevState => ({
+  handleAddRecipeClick = () => {
+    this.setState({
+      selectedRecipe: {},
+      displayModal: true,
+      mode: 'Add'
+    });
+  };
+
+  handleRecipeCardClick = (recipe) => {
+    this.setState({
+      selectedRecipe: recipe,
       displayModal: true,
       mode: 'Display'
-    }))
-  };
-
-  handleAddClick = () => {
-    this.setState(prevState => ({
-      displayModal: true,
-      mode: 'Add',
-      temporaryRecipe: {},
-      success: false
-    }))
+    });
   };
 
   handleEditClick = () => {
-    this.setState(prevState => ({
+    this.setState({
       displayModal: true,
-      mode: 'Edit',
-      temporaryRecipe: Object.assign({} ,this.state.selectedRecipe),
-      success: false
-    }))
+      mode: 'Edit'
+    });
   };
 
   handleDeleteClick = () => {
-    this.state.recipes.forEach((recipe, index) => {
-      if (recipe === this.state.selectedRecipe) {
-        let recipes = [...this.state.recipes];
-        recipes.splice(index, 1);
-        this.setState(prevState => ({
-          displayModal: false, 
-          recipes: recipes
-        }));
-        localStorage.setItem('recipes', JSON.stringify(recipes));
+    this.setState(prevState => {
+      const recipes = [...prevState.recipes];
+      for (let i = 0; i < recipes.length; i++) {
+        if (recipes[i] === this.state.selectedRecipe) {
+          recipes.splice(i, 1);
+          break;
+        }
       }
+      localStorage.setItem('recipes', JSON.stringify(recipes));
+      return {recipes: recipes, displayModal: false};
     });
   };
 
-  toggleModalDisplay = () => {
-    this.setState(prevState => ({
-      displayModal: !prevState.displayModal
-    }))
-  };
-
-  getRows = () => {
-    const rows = [];
-    this.state.recipes.forEach((recipe, index) => {
-      let row;
-      if (index % 3 === 0) {
-        row = [];
-        rows.push(row);
-      } else {
-        row = rows[Math.floor(index / 3)];
-      }
-      row.push( (<RecipeCard key={index}
-        name={this.state.recipes[index].name}
-        image={this.state.recipes[index].image}
-        onClick={() => {this.setState({selectedRecipe: this.state.recipes[index]}); this.handleCardClick();}} />)
-          );
+  handleCloseModalClick = () => {
+    this.setState({
+      selectedRecipe: {},
+      displayModal: false,
+      mode: ''
     });
-    return rows;
   };
 
-  getModal = () => {
+  renderModal = () => {
     if (this.state.mode === 'Display') {
       return (
-        <Modal onClick={this.toggleModalDisplay} title={this.state.selectedRecipe.name}>
+        <Modal
+          onClose={this.handleCloseModalClick}
+          title={this.state.selectedRecipe.name}
+        >
           <RecipeDisplay 
             {...this.state.selectedRecipe}
             onEdit={this.handleEditClick}
@@ -95,80 +77,59 @@ class App extends Component {
           />
         </Modal>
       );
+    } else if (this.state.mode === 'Add') {
+      return (
+        <Modal onClose={this.handleCloseModalClick} title="Add recipe">
+          <RecipeForm onSave={this.saveRecipe} />
+        </Modal>
+      ); 
     } else {
       return (
-        <Modal onClick={this.toggleModalDisplay} title={this.state.selectedRecipe.name}>
-          <RecipeForm name="" ingredients="" method="" image="" onSave={(recipe) => {console.log(recipe);
-            this.setState({selectedRecipe: {}})}}
+        <Modal onClose={this.handleCloseModalClick} title="Edit recipe">
+          <RecipeForm 
+            {...this.state.selectedRecipe}
+            onSave={this.updateRecipe}
           />
         </Modal>
-
-        // <RecipeFormModal
-        //   mode={this.state.mode}
-        //   onClose={this.toggleModalDisplay}
-        //   onSubmit={this.onSubmit}
-        //   onChange={this.onChange}
-        //   recipe={this.state.temporaryRecipe}
-        //   success={this.state.success}
-        // />
       );
     }
   };
 
-  onSubmit = (e) => {
-    e.preventDefault();
-    this.setState({
-      success: true
-    });
-    if (this.state.mode === 'Add') {
-      this.setState({
-        temporaryRecipe: {
-          name: '',
-          ingredients: '',
-          method: '',
-          image: ''
-        }
-      });
-      const recipes = [...this.state.recipes];
-      recipes.push(this.state.temporaryRecipe);
-      this.setState({recipes: recipes});
-      localStorage.setItem('recipes', JSON.stringify(recipes));
-    } else {
-      this.state.recipes.forEach((recipe, index) => {
-        if (recipe === this.state.selectedRecipe) {
-          const recipes = [...this.state.recipes];
-          recipes[index] = Object.assign({}, this.state.temporaryRecipe);
-          this.setState({recipes: recipes});
-          localStorage.setItem('recipes', JSON.stringify(recipes));
-        }
-      });
-    }
-  };
-
-  onChange = (e) => {
-    const id = e.target.id;
-    const value = e.target.value;
+  saveRecipe = (recipe) => {
     this.setState(prevState => {
-      const temporaryRecipe = prevState.temporaryRecipe;
-      temporaryRecipe[id] = value;
-      return ({temporaryRecipe: temporaryRecipe, success: false});
+      const recipes = [...prevState.recipes];
+      recipes.push(recipe);
+      localStorage.setItem('recipes', JSON.stringify(recipes));
+      return {recipes: recipes}
     });
   };
 
-  render() {
+  updateRecipe = (recipe) => {
+    this.setState(prevState => {
+      const recipes = [...prevState.recipes];
+      for (let i = 0; i < recipes.length; i++) {
+        if (recipes[i] === this.state.selectedRecipe) {
+          recipes[i] = recipe;
+          break;
+        }
+      }
+      localStorage.setItem('recipes', JSON.stringify(recipes));
+      return {recipes: recipes, selectedRecipe: recipe, mode: 'Display'};
+    });
+  };
+
+  render = () => {
     return (
       <div className="App">
-        <Header onClick={this.handleAddClick} />
-        <main className="main">
-          {this.getRows().map((row, index) => 
-            (<div className="row" key={index}>{row}</div>)
-          )}
-        </main>
-        {this.state.displayModal && this.getModal()}
-
+        <Header onAdd={this.handleAddRecipeClick} />
+        <RecipeList 
+          recipes={this.state.recipes}
+          onClick={this.handleRecipeCardClick}
+        />
+        {this.state.displayModal && this.renderModal()}
       </div>
     );
-  }
+  };
 }
 
 export default App;

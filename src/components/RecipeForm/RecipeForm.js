@@ -19,18 +19,21 @@ class RecipeForm extends Component {
 
   onSubmit = (e) => {
     e.preventDefault();
-    const recipe = {
+
+    // save this recipe
+    this.props.onSave({
       name: this.state.name,
       ingredients: this.state.ingredients,
       method: this.state.method,
       image: this.state.image,
-    }
-    this.props.onSave(recipe);
+    });
+
+    // reset form and note that we've saved recipe
     this.setState({
-      name: this.props.name,
-      ingredients: this.props.ingredients,
-      method: this.props.method,
-      image: this.props.image,
+      name: '',
+      ingredients: '',
+      method: '',
+      image: '',
       saved: true
     });
   };
@@ -38,7 +41,10 @@ class RecipeForm extends Component {
   onChange = (e) => {
     const id = e.target.id;
     const value = e.target.value;
-    this.setState({[id]: value, saved: false});
+    this.setState({
+      [id]: value, 
+      saved: false
+    });
   };
 
   onClear = (e) => {
@@ -57,7 +63,6 @@ class RecipeForm extends Component {
         <Label>
           Recipe name *
           <Input
-            type="text"
             id="name"
             value={this.state.name}
             onChange={this.onChange}
@@ -92,9 +97,9 @@ class RecipeForm extends Component {
             onChange={this.onChange}
           />
         </Label>
-        <Button type="submit" text="Save" />
-        <Button text="Clear" onClick={this.onClear} />
-        {this.state.saved && <span>Saved recipe!</span>}
+        <Button id="save" type="submit" text="Save" />
+        <Button id="clear" text="Clear" onClick={this.onClear} />
+        {this.state.saved && <span className="save-message">Saved recipe!</span>}
       </form>
     );
   };
