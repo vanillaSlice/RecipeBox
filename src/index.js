@@ -1,11 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import App from './components/App/App';
+import App from './components/App/';
 import registerServiceWorker from './registerServiceWorker';
 
-import 'normalize.css/normalize.css';
-import 'font-awesome/css/font-awesome.min.css';
+import '../node_modules/normalize.css/normalize.css';
+import '../node_modules/font-awesome/css/font-awesome.min.css';
 
-ReactDOM.render(<App />, document.getElementById('root'));
+ReactDOM.render(React.createElement(App), document.getElementById('root'));
+
 registerServiceWorker();
