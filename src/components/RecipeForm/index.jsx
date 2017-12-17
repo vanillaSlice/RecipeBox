@@ -73,7 +73,6 @@ class RecipeForm extends Component {
             value={this.state.name}
             onChange={this.onChange}
             required
-            autoFocus
           />
         </Label>
         <Label text="Ingredients *">
