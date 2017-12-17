@@ -66,7 +66,7 @@ class RecipeForm extends Component {
 
   render() {
     return (
-      <form className="RecipeForm" onSubmit={this.onSubmit}>
+      <form className="recipe-form" onSubmit={this.onSubmit}>
         <Label text="Recipe name *">
           <Input
             id="name"
@@ -94,7 +94,7 @@ class RecipeForm extends Component {
         </Label>
         <Label text="Image URL (optional)">
           <Input
-            type="URL"
+            type="url"
             id="image"
             value={this.state.image}
             onChange={this.onChange}
@@ -102,7 +102,7 @@ class RecipeForm extends Component {
         </Label>
         <Button id="save" type="submit" text="Save" />
         <Button id="clear" text="Clear" onClick={this.onClear} />
-        {this.state.saved && <span className="save-message">Saved recipe!</span>}
+        {this.state.saved && <span className="recipe-form__save-message">Saved recipe!</span>}
       </form>
     );
   }

@@ -3,7 +3,7 @@ import { shallow } from 'enzyme';
 import ReactTestUtils from 'react-dom/test-utils';
 
 import RecipeForm from './';
-import TestUtils from './testUtils';
+import RecipeFormTestUtils from './RecipeFormTestUtils';
 
 describe('RecipeForm', () => {
   it('renders name', () => {
@@ -42,22 +42,22 @@ describe('RecipeForm', () => {
     };
     const component = ReactTestUtils.renderIntoDocument(<RecipeForm onSave={onSave} />);
 
-    TestUtils.updateName(component, 'test-name');
-    TestUtils.updateIngredients(component, 'test-ingredients');
-    TestUtils.updateMethod(component, 'test-method');
-    TestUtils.updateImage(component, 'test-image');
+    RecipeFormTestUtils.updateName(component, 'test-name');
+    RecipeFormTestUtils.updateIngredients(component, 'test-ingredients');
+    RecipeFormTestUtils.updateMethod(component, 'test-method');
+    RecipeFormTestUtils.updateImage(component, 'test-image');
 
-    TestUtils.submit(component);
+    RecipeFormTestUtils.submit(component);
 
     it('clears form', () => {
-      expect(TestUtils.getName(component)).toBe('');
-      expect(TestUtils.getIngredients(component)).toBe('');
-      expect(TestUtils.getMethod(component)).toBe('');
-      expect(TestUtils.getImage(component)).toBe('');
+      expect(RecipeFormTestUtils.getName(component)).toBe('');
+      expect(RecipeFormTestUtils.getIngredients(component)).toBe('');
+      expect(RecipeFormTestUtils.getMethod(component)).toBe('');
+      expect(RecipeFormTestUtils.getImage(component)).toBe('');
     });
 
     it('renders save message', () => {
-      const saveMessage = ReactTestUtils.findRenderedDOMComponentWithClass(component, 'save-message');
+      const saveMessage = ReactTestUtils.findRenderedDOMComponentWithClass(component, 'recipe-form__save-message');
       expect(saveMessage.textContent).toBe('Saved recipe!');
     });
   });

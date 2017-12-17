@@ -4,12 +4,12 @@
   width: 100%;
 }
 
-.recipe-list__row {
+.recipe-list .recipe-list__row {
   padding: 0 0.5rem;
   width: 100%;
 }
 
-.recipe-list__row::after {
+.recipe-list .recipe-list__row::after {
   clear: both;
   content: '';
   display: table;

@@ -7,7 +7,7 @@ describe('Input', () => {
   const onChange = jest.fn();
   const input = shallow((
     <Input
-      type="URL"
+      type="url"
       id="test-id"
       value="test-value"
       onChange={onChange}
@@ -17,7 +17,7 @@ describe('Input', () => {
   ));
 
   test('renders type', () => {
-    expect(input.props().type).toBe('URL');
+    expect(input.props().type).toBe('url');
   });
 
   test('renders id', () => {
@@ -35,9 +35,5 @@ describe('Input', () => {
 
   test('renders required attribute', () => {
     expect(input.props().required).toBe(true);
-  });
-
-  test('renders autoFocus attribute', () => {
-    expect(input.props().autoFocus).toBe(true);
   });
 });

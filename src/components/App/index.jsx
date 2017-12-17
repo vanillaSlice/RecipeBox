@@ -109,21 +109,23 @@ class App extends Component {
           <RecipeForm onSave={this.saveRecipe} />
         </Modal>
       );
+    } else if (this.state.mode === 'Edit') {
+      return (
+        <Modal onClose={this.handleCloseModalClick} title="Edit recipe">
+          <RecipeForm
+            {...this.state.selectedRecipe}
+            onSave={this.updateRecipe}
+          />
+        </Modal>
+      );
     }
 
-    return (
-      <Modal onClose={this.handleCloseModalClick} title="Edit recipe">
-        <RecipeForm
-          {...this.state.selectedRecipe}
-          onSave={this.updateRecipe}
-        />
-      </Modal>
-    );
+    return <Modal />;
   }
 
   render() {
     return (
-      <div className="App">
+      <div className="app">
         <Header onAdd={this.handleAddRecipeClick} />
         <RecipeList
           recipes={this.state.recipes}

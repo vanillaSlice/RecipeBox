@@ -13,8 +13,12 @@ const Label = props => (
 );
 
 Label.propTypes = {
-  text: PropTypes.string.isRequired,
+  text: PropTypes.string,
   children: PropTypes.node.isRequired,
+};
+
+Label.defaultProps = {
+  text: '',
 };
 
 export default Label;

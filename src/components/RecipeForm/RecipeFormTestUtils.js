@@ -1,6 +1,6 @@
 import ReactTestUtils from 'react-dom/test-utils';
 
-const TestUtils = (() => {
+const RecipeFormTestUtils = (() => {
   const getInputs = component =>
     ReactTestUtils.scryRenderedDOMComponentsWithTag(component, 'input');
 
@@ -39,4 +39,4 @@ const TestUtils = (() => {
   };
 })();
 
-export default TestUtils;
+export default RecipeFormTestUtils;

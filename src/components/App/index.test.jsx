@@ -6,8 +6,9 @@ import { mount, shallow } from 'enzyme';
 import localStorage from 'mock-local-storage';
 
 import App from './';
+import RecipeFormTestUtils from '../RecipeForm/RecipeFormTestUtils';
+
 import data from '../../data/recipes.json';
-import TestUtils from '../RecipeForm/testUtils';
 
 window.localStorage = global.localStorage;
 
@@ -64,11 +65,11 @@ describe('App', () => {
     const addRecipeButton = ReactTestUtils.findRenderedDOMComponentWithClass(component, 'icon-btn');
     ReactTestUtils.Simulate.click(addRecipeButton);
 
-    TestUtils.updateName(component, 'test-name');
-    TestUtils.updateIngredients(component, 'test-ingredients');
-    TestUtils.updateMethod(component, 'test-method');
-    TestUtils.updateImage(component, 'test-image');
-    TestUtils.submit(component);
+    RecipeFormTestUtils.updateName(component, 'test-name');
+    RecipeFormTestUtils.updateIngredients(component, 'test-ingredients');
+    RecipeFormTestUtils.updateMethod(component, 'test-method');
+    RecipeFormTestUtils.updateImage(component, 'test-image');
+    RecipeFormTestUtils.submit(component);
 
     const savedRecipes = JSON.parse(window.localStorage.getItem('recipes'));
 
@@ -100,8 +101,8 @@ describe('App', () => {
     const editButton = ReactTestUtils.scryRenderedDOMComponentsWithClass(component, 'btn')[0];
     ReactTestUtils.Simulate.click(editButton);
 
-    TestUtils.updateName(component, 'test-name');
-    TestUtils.submit(component);
+    RecipeFormTestUtils.updateName(component, 'test-name');
+    RecipeFormTestUtils.submit(component);
 
     const savedRecipes = JSON.parse(window.localStorage.getItem('recipes'));
     const actualRecipe = savedRecipes[0];

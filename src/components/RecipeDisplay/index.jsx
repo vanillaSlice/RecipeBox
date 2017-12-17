@@ -29,12 +29,21 @@ const RecipeDisplay = props => (
 );
 
 RecipeDisplay.propTypes = {
-  image: PropTypes.string.isRequired,
-  name: PropTypes.string.isRequired,
-  ingredients: PropTypes.string.isRequired,
-  method: PropTypes.string.isRequired,
-  onEdit: PropTypes.func.isRequired,
-  onDelete: PropTypes.func.isRequired,
+  image: PropTypes.string,
+  name: PropTypes.string,
+  ingredients: PropTypes.string,
+  method: PropTypes.string,
+  onEdit: PropTypes.func,
+  onDelete: PropTypes.func,
+};
+
+RecipeDisplay.defaultProps = {
+  image: '',
+  name: '',
+  ingredients: '',
+  method: '',
+  onEdit: null,
+  onDelete: null,
 };
 
 export default RecipeDisplay;

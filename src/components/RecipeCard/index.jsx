@@ -21,9 +21,15 @@ const RecipeCard = props => (
 );
 
 RecipeCard.propTypes = {
-  onClick: PropTypes.func.isRequired,
-  image: PropTypes.string.isRequired,
-  name: PropTypes.string.isRequired,
+  onClick: PropTypes.func,
+  image: PropTypes.string,
+  name: PropTypes.string,
+};
+
+RecipeCard.defaultProps = {
+  onClick: null,
+  image: '',
+  name: '',
 };
 
 export default RecipeCard;

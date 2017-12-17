@@ -10,7 +10,7 @@
   }
 }
 
-.recipe-card__content {
+.recipe-card .recipe-card__content {
   background-color: #def2f1;
   border-radius: 0.25rem;
   border: 0.625rem solid #def2f1;
@@ -20,7 +20,7 @@
   width: 100%;
 }
 
-.recipe-card__img {
+.recipe-card .recipe-card__img {
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -28,7 +28,7 @@
   width: 100%;
 }
 
-.recipe-card__title {
+.recipe-card .recipe-card__title {
   background-color: #2b7a78;
   color: #feffff;
   hyphens: auto;
