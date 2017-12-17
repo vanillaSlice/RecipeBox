@@ -5,10 +5,14 @@
   height: 100%;
   left: 0;
   overflow: auto;
-  position: absolute;
+  position: fixed;
   right: 0;
   top: 0;
   width: 100%;
+}
+
+.modal .modal__container {
+  height: 100%;
 }
 
 .modal .modal__content {
@@ -20,16 +24,6 @@
   overflow: auto;
   padding: 1rem;
   width: 100%;
-}
-
-@media (min-width: 48em) {
-  .modal .modal__content {
-    border-radius: 0.25rem;
-    height: initial;
-    margin: 2rem auto;
-    max-width: 45.75rem;
-    width: 45.75rem;
-  }
 }
 
 .modal .modal__header {
@@ -47,4 +41,18 @@
   align-self: flex-start;
   margin-top: 1rem;
   margin-left: auto;
+}
+
+@media (min-width: 48em) {
+  .modal .modal__container {
+    height: initial;
+  }
+
+  .modal .modal__content {
+    border-radius: 0.25rem;
+    height: initial;
+    margin: 2rem auto;
+    max-width: 45.75rem;
+    width: 45.75rem;
+  }
 }
