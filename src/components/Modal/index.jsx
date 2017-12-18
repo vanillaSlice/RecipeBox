@@ -22,7 +22,9 @@ const Modal = props => (
             description="Close modal"
           />
         </div>
-        {props.children}
+        <div className="modal__body">
+          {props.children}
+        </div>
       </div>
     </div>
   </div>
