@@ -4,6 +4,7 @@
   cursor: pointer;
   display: inline-block;
   outline: none;
+  padding: 0;
   transition: color 0.1s linear;
 }
 
