@@ -1,3 +1,5 @@
+/* eslint-disable react/button-has-type */
+
 import React from 'react';
 import PropTypes from 'prop-types';
 
@@ -11,21 +13,9 @@ const Button = (props) => {
     text,
   } = props;
 
-  if (type === 'submit') {
-    return (
-      <button
-        type="submit"
-        className={`btn btn--${buttonStyle}`}
-        onClick={onClick}
-      >
-        {text}
-      </button>
-    );
-  }
-
   return (
     <button
-      type="button"
+      type={type}
       className={`btn btn--${buttonStyle}`}
       onClick={onClick}
     >

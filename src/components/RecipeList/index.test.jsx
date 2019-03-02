@@ -60,7 +60,7 @@ describe('RecipeList', () => {
     });
   });
 
-  it('renders rows', () => {
+  test('renders rows', () => {
     expect(recipeList.find('.recipe-list__row').length).toBe(2);
   });
 });
