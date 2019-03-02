@@ -97,7 +97,6 @@ class App extends Component {
       selectedRecipe,
     } = this.state;
 
-
     if (mode === 'Display') {
       return (
         <Modal

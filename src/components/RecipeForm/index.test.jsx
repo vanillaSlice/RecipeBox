@@ -6,27 +6,27 @@ import RecipeForm from '.';
 import RecipeFormTestUtils from './RecipeFormTestUtils';
 
 describe('RecipeForm', () => {
-  it('renders name', () => {
+  test('renders name', () => {
     const recipeForm = shallow(<RecipeForm name="test-name" />);
     expect(recipeForm.find('#name').props().value).toBe('test-name');
   });
 
-  it('renders ingredients', () => {
+  test('renders ingredients', () => {
     const recipeForm = shallow(<RecipeForm ingredients="test-ingredients" />);
     expect(recipeForm.find('#ingredients').props().value).toBe('test-ingredients');
   });
 
-  it('renders method', () => {
+  test('renders method', () => {
     const recipeForm = shallow(<RecipeForm method="test-method" />);
     expect(recipeForm.find('#method').props().value).toBe('test-method');
   });
 
-  it('renders image', () => {
+  test('renders image', () => {
     const recipeForm = shallow(<RecipeForm image="test-image" />);
     expect(recipeForm.find('#image').props().value).toBe('test-image');
   });
 
-  it('renders save button', () => {
+  test('renders save button', () => {
     const recipeForm = shallow(<RecipeForm />);
     expect(recipeForm.find('#save').props().text).toBe('Save');
   });
@@ -49,14 +49,14 @@ describe('RecipeForm', () => {
 
     RecipeFormTestUtils.submit(component);
 
-    it('clears form', () => {
+    test('clears form', () => {
       expect(RecipeFormTestUtils.getName(component)).toBe('');
       expect(RecipeFormTestUtils.getIngredients(component)).toBe('');
       expect(RecipeFormTestUtils.getMethod(component)).toBe('');
       expect(RecipeFormTestUtils.getImage(component)).toBe('');
     });
 
-    it('renders save message', () => {
+    test('renders save message', () => {
       const saveMessage = ReactTestUtils.findRenderedDOMComponentWithClass(component, 'recipe-form__save-message');
       expect(saveMessage.textContent).toBe('Saved recipe!');
     });
@@ -73,11 +73,11 @@ describe('RecipeForm', () => {
     ));
     const clearButton = recipeForm.find('#clear');
 
-    it('renders', () => {
+    test('renders', () => {
       expect(clearButton.length).toBe(1);
     });
 
-    it('clears form on click', () => {
+    test('clears form on click', () => {
       clearButton.simulate('click');
       expect(recipeForm.find('#name').props().value).toBe('');
       expect(recipeForm.find('#ingredients').props().value).toBe('');

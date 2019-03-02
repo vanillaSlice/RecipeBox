@@ -1,9 +1,6 @@
-/* eslint-disable no-unused-vars */
-
 import React from 'react';
 import ReactTestUtils from 'react-dom/test-utils';
 import { mount, shallow } from 'enzyme';
-import localStorage from 'mock-local-storage';
 
 import App from '.';
 import RecipeFormTestUtils from '../RecipeForm/RecipeFormTestUtils';
@@ -82,7 +79,7 @@ describe('App', () => {
       expect(actualRecipe).toEqual(expectedRecipe);
     });
 
-    it('updated the recipe card list', () => {
+    test('updated the recipe card list', () => {
       const recipeCards = ReactTestUtils.scryRenderedDOMComponentsWithClass(component, 'recipe-card');
       expect(recipeCards.length).toEqual(savedRecipes.length);
     });
@@ -122,11 +119,11 @@ describe('App', () => {
 
     const updatedNumberOfRecipes = JSON.parse(window.localStorage.getItem('recipes')).length;
 
-    it('is deleted from localStorage', () => {
+    test('is deleted from localStorage', () => {
       expect(updatedNumberOfRecipes).toBe(originalNumberOfRecipes - 1);
     });
 
-    it('updated the recipe card list', () => {
+    test('updated the recipe card list', () => {
       const recipeCards = ReactTestUtils.scryRenderedDOMComponentsWithClass(component, 'recipe-card');
       expect(recipeCards.length).toEqual(updatedNumberOfRecipes);
     });
