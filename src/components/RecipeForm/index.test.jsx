@@ -2,7 +2,7 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import ReactTestUtils from 'react-dom/test-utils';
 
-import RecipeForm from './';
+import RecipeForm from '.';
 import RecipeFormTestUtils from './RecipeFormTestUtils';
 
 describe('RecipeForm', () => {

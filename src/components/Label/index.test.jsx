@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 
-import Label from './';
+import Label from '.';
 
 describe('Label', () => {
   const text = 'label-text';

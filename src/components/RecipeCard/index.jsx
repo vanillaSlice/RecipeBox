@@ -8,17 +8,25 @@ import PropTypes from 'prop-types';
 
 import './index.css';
 
-const RecipeCard = props => (
-  <div className="recipe-card" onClick={props.onClick}>
-    <div className="recipe-card__content">
-      <div
-        className="recipe-card__img"
-        style={{ backgroundImage: `url('${props.image}')` }}
-      />
-      <h2 className="recipe-card__title">{props.name}</h2>
+const RecipeCard = (props) => {
+  const {
+    onClick,
+    image,
+    name,
+  } = props;
+
+  return (
+    <div className="recipe-card" onClick={onClick}>
+      <div className="recipe-card__content">
+        <div
+          className="recipe-card__img"
+          style={{ backgroundImage: `url('${image}')` }}
+        />
+        <h2 className="recipe-card__title">{name}</h2>
+      </div>
     </div>
-  </div>
-);
+  );
+};
 
 RecipeCard.propTypes = {
   onClick: PropTypes.func,

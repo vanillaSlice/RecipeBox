@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 
-import RecipeDisplay from './';
+import RecipeDisplay from '.';
 
 describe('RecipeDisplay', () => {
   const onEdit = jest.fn();

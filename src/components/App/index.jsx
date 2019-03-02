@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 
-import Header from '../Header/';
-import RecipeList from '../RecipeList/';
-import Modal from '../Modal/';
-import RecipeForm from '../RecipeForm/';
-import RecipeDisplay from '../RecipeDisplay/';
+import Header from '../Header';
+import RecipeList from '../RecipeList';
+import Modal from '../Modal';
+import RecipeForm from '../RecipeForm';
+import RecipeDisplay from '../RecipeDisplay';
 
 import data from '../../data/recipes.json';
 
@@ -56,7 +56,8 @@ class App extends Component {
 
   handleDeleteClick() {
     this.setState((prevState) => {
-      const recipes = [...prevState.recipes].filter(recipe => recipe !== this.state.selectedRecipe);
+      const { selectedRecipe } = this.state;
+      const recipes = [...prevState.recipes].filter(recipe => recipe !== selectedRecipe);
       localStorage.setItem('recipes', JSON.stringify(recipes));
       return { recipes, displayModal: false };
     });
@@ -73,7 +74,8 @@ class App extends Component {
   updateRecipe(recipe) {
     this.setState((prevState) => {
       const recipes = [...prevState.recipes];
-      const index = recipes.findIndex(e => e === this.state.selectedRecipe);
+      const { selectedRecipe } = this.state;
+      const index = recipes.findIndex(e => e === selectedRecipe);
       recipes[index] = recipe;
       localStorage.setItem('recipes', JSON.stringify(recipes));
       return { recipes, selectedRecipe: recipe, mode: 'Display' };
@@ -90,30 +92,40 @@ class App extends Component {
   }
 
   renderModal() {
-    if (this.state.mode === 'Display') {
+    const {
+      mode,
+      selectedRecipe,
+    } = this.state;
+
+
+    if (mode === 'Display') {
       return (
         <Modal
           onClose={this.handleCloseModalClick}
-          title={this.state.selectedRecipe.name}
+          title={selectedRecipe.name}
         >
           <RecipeDisplay
-            {...this.state.selectedRecipe}
+            {...selectedRecipe}
             onEdit={this.handleEditClick}
             onDelete={this.handleDeleteClick}
           />
         </Modal>
       );
-    } else if (this.state.mode === 'Add') {
+    }
+
+    if (mode === 'Add') {
       return (
         <Modal onClose={this.handleCloseModalClick} title="Add recipe">
           <RecipeForm onSave={this.saveRecipe} />
         </Modal>
       );
-    } else if (this.state.mode === 'Edit') {
+    }
+
+    if (mode === 'Edit') {
       return (
         <Modal onClose={this.handleCloseModalClick} title="Edit recipe">
           <RecipeForm
-            {...this.state.selectedRecipe}
+            {...selectedRecipe}
             onSave={this.updateRecipe}
           />
         </Modal>
@@ -124,14 +136,16 @@ class App extends Component {
   }
 
   render() {
+    const { recipes, displayModal } = this.state;
+
     return (
       <div className="app">
         <Header onAdd={this.handleAddRecipeClick} />
         <RecipeList
-          recipes={this.state.recipes}
+          recipes={recipes}
           onClick={this.handleRecipeCardClick}
         />
-        {this.state.displayModal && this.renderModal()}
+        {displayModal && this.renderModal()}
       </div>
     );
   }

@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 
-import IconButton from './';
+import IconButton from '.';
 
 describe('IconButton', () => {
   const onClick = jest.fn();

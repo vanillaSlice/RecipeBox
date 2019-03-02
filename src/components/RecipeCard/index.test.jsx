@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 
-import RecipeCard from './';
+import RecipeCard from '.';
 
 describe('RecipeCard', () => {
   const onClick = jest.fn();
