@@ -4,15 +4,25 @@ import FontAwesome from 'react-fontawesome';
 
 import './index.css';
 
-const IconButton = props => (
-  <button
-    className={`icon-btn icon-btn--${props.buttonStyle}`}
-    onClick={props.onClick}
-  >
-    <FontAwesome name={props.icon} size="2x" tag="i" />
-    <span className="sr-only">{props.description}</span>
-  </button>
-);
+const IconButton = (props) => {
+  const {
+    buttonStyle,
+    onClick,
+    icon,
+    description,
+  } = props;
+
+  return (
+    <button
+      type="button"
+      className={`icon-btn icon-btn--${buttonStyle}`}
+      onClick={onClick}
+    >
+      <FontAwesome name={icon} size="2x" tag="i" />
+      <span className="sr-only">{description}</span>
+    </button>
+  );
+};
 
 IconButton.propTypes = {
   buttonStyle: PropTypes.oneOf(['dark', 'light']),

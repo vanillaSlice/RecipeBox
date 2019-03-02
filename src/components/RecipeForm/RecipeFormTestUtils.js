@@ -1,11 +1,9 @@
 import ReactTestUtils from 'react-dom/test-utils';
 
 const RecipeFormTestUtils = (() => {
-  const getInputs = component =>
-    ReactTestUtils.scryRenderedDOMComponentsWithTag(component, 'input');
+  const getInputs = component => ReactTestUtils.scryRenderedDOMComponentsWithTag(component, 'input');
 
-  const getTextAreas = component =>
-    ReactTestUtils.scryRenderedDOMComponentsWithTag(component, 'textarea');
+  const getTextAreas = component => ReactTestUtils.scryRenderedDOMComponentsWithTag(component, 'textarea');
 
   return {
     updateName: (component, value) => {

@@ -3,15 +3,36 @@ import PropTypes from 'prop-types';
 
 import './index.css';
 
-const Button = props => (
-  <button
-    type={props.type}
-    className={`btn btn--${props.buttonStyle}`}
-    onClick={props.onClick}
-  >
-    {props.text}
-  </button>
-);
+const Button = (props) => {
+  const {
+    type,
+    buttonStyle,
+    onClick,
+    text,
+  } = props;
+
+  if (type === 'submit') {
+    return (
+      <button
+        type="submit"
+        className={`btn btn--${buttonStyle}`}
+        onClick={onClick}
+      >
+        {text}
+      </button>
+    );
+  }
+
+  return (
+    <button
+      type="button"
+      className={`btn btn--${buttonStyle}`}
+      onClick={onClick}
+    >
+      {text}
+    </button>
+  );
+};
 
 Button.propTypes = {
   type: PropTypes.oneOf(['button', 'submit']),

@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import Label from '../Label/';
-import Input from '../Input/';
-import TextArea from '../TextArea/';
-import Button from '../Button/';
+import Label from '../Label';
+import Input from '../Input';
+import TextArea from '../TextArea';
+import Button from '../Button';
 
 import './index.css';
 
@@ -12,11 +12,18 @@ class RecipeForm extends Component {
   constructor(props) {
     super(props);
 
+    const {
+      name,
+      ingredients,
+      method,
+      image,
+    } = this.props;
+
     this.state = {
-      name: this.props.name,
-      ingredients: this.props.ingredients,
-      method: this.props.method,
-      image: this.props.image,
+      name,
+      ingredients,
+      method,
+      image,
       saved: false,
     };
 
@@ -28,12 +35,20 @@ class RecipeForm extends Component {
   onSubmit(e) {
     e.preventDefault();
 
+    const {
+      name,
+      ingredients,
+      method,
+      image,
+    } = this.state;
+    const { onSave } = this.props;
+
     // save this recipe
-    this.props.onSave({
-      name: this.state.name,
-      ingredients: this.state.ingredients,
-      method: this.state.method,
-      image: this.state.image,
+    onSave({
+      name,
+      ingredients,
+      method,
+      image,
     });
 
     // reset form and note that we've saved recipe
@@ -65,12 +80,20 @@ class RecipeForm extends Component {
   }
 
   render() {
+    const {
+      name,
+      ingredients,
+      method,
+      image,
+      saved,
+    } = this.state;
+
     return (
       <form className="recipe-form" onSubmit={this.onSubmit}>
         <Label text="Recipe name *">
           <Input
             id="name"
-            value={this.state.name}
+            value={name}
             onChange={this.onChange}
             required
           />
@@ -78,7 +101,7 @@ class RecipeForm extends Component {
         <Label text="Ingredients *">
           <TextArea
             id="ingredients"
-            value={this.state.ingredients}
+            value={ingredients}
             onChange={this.onChange}
             required
           />
@@ -86,7 +109,7 @@ class RecipeForm extends Component {
         <Label text="Method *">
           <TextArea
             id="method"
-            value={this.state.method}
+            value={method}
             onChange={this.onChange}
             required
           />
@@ -95,13 +118,13 @@ class RecipeForm extends Component {
           <Input
             type="url"
             id="image"
-            value={this.state.image}
+            value={image}
             onChange={this.onChange}
           />
         </Label>
         <Button id="save" type="submit" text="Save" />
         <Button id="clear" text="Clear" onClick={this.onClear} />
-        {this.state.saved && <span className="recipe-form__save-message">Saved recipe!</span>}
+        {saved && <span className="recipe-form__save-message">Saved recipe!</span>}
       </form>
     );
   }

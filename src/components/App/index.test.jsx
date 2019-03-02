@@ -5,12 +5,10 @@ import ReactTestUtils from 'react-dom/test-utils';
 import { mount, shallow } from 'enzyme';
 import localStorage from 'mock-local-storage';
 
-import App from './';
+import App from '.';
 import RecipeFormTestUtils from '../RecipeForm/RecipeFormTestUtils';
 
 import data from '../../data/recipes.json';
-
-window.localStorage = global.localStorage;
 
 const recipes = [...data.recipes];
 
