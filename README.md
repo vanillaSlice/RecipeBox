@@ -5,26 +5,50 @@
 [![Coverage Status](https://img.shields.io/coveralls/github/vanillaSlice/RecipeBox/master.svg)](https://coveralls.io/github/vanillaSlice/RecipeBox?branch=master)
 [![License](https://img.shields.io/github/license/vanillaSlice/RecipeBox.svg)](LICENSE)
 
-A recipe box app built using React. A working version can be viewed [here](https://vanillaslice.github.io/RecipeBox/).
+A recipe box app built using [React](https://reactjs.org/).
+A deployed version can be viewed [here](https://vanillaslice.github.io/RecipeBox/).
 
-This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
+## Screenshot
 
-## Installing dependencies
+![Screenshot](/images/screenshot-1.png)
+
+## Getting Started
+
+### Prerequisites
+
+* [npm](https://www.npmjs.com/)
+
+### Installing Dependencies
+
+From your terminal/command prompt run:
+
 ```
-yarn install
+npm install
 ```
 
-## Running locally
+### Running
+
+From your terminal/command prompt run:
+
 ```
-yarn start
+npm start
 ```
 
-## Run tests
-```
-yarn test
-```
+Point your browser to [localhost:3000](http://localhost:3000).
 
-## Deploy
-```
-yarn deploy
-```
+## Technology Used
+
+For those of you that are interested, the technology used in this project includes:
+
+* [React](https://reactjs.org/)
+* [Jest](https://jestjs.io/) (Testing)
+
+## Useful Links
+
+Resources useful for the completion of this project:
+
+* [Create React App](https://github.com/facebook/create-react-app) (React starter kit)
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
