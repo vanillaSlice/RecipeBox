@@ -6,7 +6,7 @@
 [![License](https://img.shields.io/github/license/vanillaSlice/RecipeBox.svg)](LICENSE)
 
 A recipe box app built using [React](https://reactjs.org/).
-A deployed version can be viewed [here](https://vanillaslice.github.io/RecipeBox/).
+A deployed version can be viewed [here](https://recipebox.mikelowe.xyz/).
 
 ## Screenshot
 
