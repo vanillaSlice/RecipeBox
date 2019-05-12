@@ -128,4 +128,9 @@ describe('App', () => {
       expect(recipeCards.length).toEqual(updatedNumberOfRecipes);
     });
   });
+
+  test('renders footer', () => {
+    const app = shallow(<App />);
+    expect(app.find('Footer').length).toBe(1);
+  });
 });
