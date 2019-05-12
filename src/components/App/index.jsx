@@ -5,6 +5,7 @@ import RecipeList from '../RecipeList';
 import Modal from '../Modal';
 import RecipeForm from '../RecipeForm';
 import RecipeDisplay from '../RecipeDisplay';
+import Footer from '../Footer';
 
 import data from '../../data/recipes.json';
 
@@ -145,6 +146,7 @@ class App extends Component {
           onClick={this.handleRecipeCardClick}
         />
         {displayModal && this.renderModal()}
+        <Footer />
       </div>
     );
   }
